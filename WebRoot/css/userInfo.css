@@ -1,0 +1,71 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.t2 table td{
+	 border-left:1px solid #D7D7D7;
+	 border-top:1px solid #D7D7D7;
+	 }
+#userInfo{
+	width:1000px;
+	height:500px;
+	margin-left:200px;
+	margin-top:13px;
+	border:1px solid #D7D7D7;
+}
+#head{
+	width:800;
+	height:70px;
+	border-bottom:1px solid #E3E3E3;
+	margin-left:50px;
+}
+#welcome{
+	margin-left:88px;
+	margin-top:20px;
+	color:#019865;
+	font-size:23px;
+	font-weight:bold;
+}
+.input{
+	margin-left:88px;
+	margin-top:10px;
+}
+#save{
+	width:80px;
+	height:30px;
+	background:#0099FE;
+	color:#FFFFFF;
+	border:0px;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bolder;
+	border-color: #CD6504;
+	onMouseOver:"this.style.backgroundColor ='#FF9600';this.style.color='#0080EF'";
+	onMouseOut:"this.style.backgroundColor ='#0099FE';this.style.color='#ffffff'";
+}
+#recharge{
+	width:80px;
+	height:30px;
+	background:#0099FE;
+	color:#FFFFFF;
+	border:0px;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bolder;
+}
+#edit{
+	width:80px;
+	height:30px;
+	background:#0099FE;
+	color:#FFFFFF;
+	border:0px;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bolder;
+}
+#headImg{
+	position:relative;
+	margin-top:25px;
+	margin-left:100px;
+	float:left;
+}

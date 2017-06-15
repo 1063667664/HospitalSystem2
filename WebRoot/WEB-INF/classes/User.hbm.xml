@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.whx.bean.User" table="user" catalog="hospital">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="activated" type="java.lang.String">
+            <column name="activated" length="20"  />
+        </property>
+        <property name="randomCode" type="java.lang.String">
+            <column name="randomCode" length="20"  />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="20"  />
+        </property>
+        <property name="userName" type="java.lang.String">
+            <column name="user_name" length="20" not-null="true" />
+        </property>
+        <property name="userPwd" type="java.lang.String">
+            <column name="user_pwd" length="20" not-null="true" />
+        </property>
+        <property name="userRealname" type="java.lang.String">
+            <column name="user_realname" length="20" not-null="true" />
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="sex" length="2" not-null="true" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="65535" not-null="true" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="tel" not-null="true" />
+        </property>
+        <property name="identificationId" type="java.lang.String">
+            <column name="identification_id" not-null="true" />
+        </property>
+        <property name="birthday" type="java.util.Date">
+            <column name="birthday" length="0" not-null="true" />
+        </property>
+        <property name="balance" type="java.lang.Integer">
+        <column name="balance" length="3" not-null="true"/>
+        </property>
+        <property name="imageUrl" type="java.lang.String">
+           <column name="imageUrl" length="3" not-null="true"></column>
+        </property>
+    </class>
+</hibernate-mapping>

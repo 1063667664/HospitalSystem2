@@ -1,0 +1,62 @@
+#register {
+	width: 1000px;
+	height: 650px;
+	align: center;
+	margin: auto auto;
+	margin-top: 20px;
+	margin-left: 200;
+	background-color: fff;
+	border: 1px solid #D7D7D7;
+}
+
+#shuoming {
+	color: blue;
+	margin-left: 40px;
+	margin-top: 30px;
+	border-bottom: 1px solid #D7D7D7;
+}
+
+#text {
+	margin-left: 130;
+	margin-top: 40px;
+}
+
+#name {
+	font-size: 14px;
+	color: red;
+}
+
+#pass {
+	font-size: 14px;
+	color: red;
+}
+
+#Ackpass {
+	font-size: 14px;
+	color: red;
+}
+#vc {
+	font-size: 14px;
+	color: red;
+}
+
+#rname {
+	font-size: 14px;
+	color: red;
+}
+
+#idCard {
+	font-size: 14px;
+	color: red;
+}
+
+#adr {
+	font-size: 14px;
+	color: red;
+}
+
+#tel {
+	font-size: 14px;
+	color: red;
+}
+</style>

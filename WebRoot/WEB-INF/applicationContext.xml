@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	destroy-method="close">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/hospital" />
+	<property name="user" value="root" />
+	<property name="password" value="123456"/>
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	<property name="mappingResources">
+	<list>
+	<value>User.hbm.xml</value>
+	<value>Hospital.hbm.xml</value>
+	<value>Period.hbm.xml</value>
+	<value>Registration.hbm.xml</value>
+	<value>Doctor.hbm.xml</value>
+	<value>Schedule.hbm.xml</value>
+	<value>Department.hbm.xml</value>
+	<value>WorkTime.hbm.xml</value>
+	</list>
+	</property>
+	<property name="hibernateProperties">
+	<props>
+	<prop key="hibernate.dialect">
+	  org.hibernate.dialect.MySQLDialect
+	</prop>
+	<prop key="show_sql">true</prop>
+	<prop key="hibernate.hbm2ddl.auto">update</prop>
+	<prop key="hibernate.jdbc.batch_size">20</prop>
+	</props>
+	</property>
+	</bean>
+	 <!-- 定义事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="select*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="ProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 指定需要Spring管理事务的Bean -->
+		<property name="beanNames">
+			<list>
+				<value>userService</value>	
+				<value>departmentService</value>
+				<value>doctorService</value>
+				<value>scheduleService</value>
+				<value>registerOrderDao</value>
+				<value>userDao</value>	
+				<value>hospitalDao</value>
+				<value>departmentDao</value>
+				<value>doctorDao</value>
+				<value>scheduleDao</value>
+			
+			</list>
+		</property>
+		<!-- 调用事务管理拦截器 -->
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 依赖注入 -->
+	<bean id="userDao" class="com.whx.dao.Impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="userService"
+		class="com.whx.service.UserService">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	<bean id="hospitalDao" class="com.whx.dao.Impl.HospitalDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="doctorDao" class="com.whx.dao.Impl.DoctorDaoImpl">
+	     <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="departmentService" class="com.whx.service.DepartmentServiceImpl">
+	<property name="departmentDao" ref="departmentDao"></property>
+	</bean>
+	<bean id="doctorService" class="com.whx.service.DoctorServiceImpl">
+	  <property name="doctorDao" ref="doctorDao"></property>
+	</bean>
+	<bean id="departmentDao" class="com.whx.dao.Impl.DepartmentDaoImpl">
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="hospitalService"
+		class="com.whx.service.HospitalServiceImpl">
+		<property name="hospitalDao" ref="hospitalDao" />
+	</bean>
+	<bean id="login" class="com.whx.action.login.LoginAction">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="worktime" class="com.whx.action.hospitalInit.SelectTimeAction">
+		<property name="scheduleService" ref="scheduleService"></property>
+	</bean>
+	<bean id="scheduleDao" class="com.whx.dao.Impl.ScheduleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="registerOrderDao" class="com.whx.dao.Impl.RegisterOrderDaoImpl">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="registrationDao" class="com.whx.dao.Impl.RegistrationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bookingDao" class="com.whx.dao.Impl.BookingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bookingAction" class="com.whx.action.hospitalInit.BookingAction">
+	<property name="bookingDao" ref="bookingDao"></property>
+	</bean>
+	<bean id="scheduleService" class="com.whx.service.ScheduleService">
+		<property name="scheduleDao" ref="scheduleDao"></property>
+		<property name="registrationDao" ref="registrationDao"></property>
+	</bean>
+	<bean id="payDao" class="com.whx.dao.Impl.PayDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	</beans>

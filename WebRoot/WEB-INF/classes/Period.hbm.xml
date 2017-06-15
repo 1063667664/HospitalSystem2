@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.whx.bean.Period" table="period" catalog="hospital">
+        <id name="periodId" type="java.lang.Integer">
+            <column name="period_id" />
+            <generator class="identity" />
+        </id>
+        <property name="date" type="java.util.Date">
+            <column name="date" length="10" not-null="true" />
+        </property>
+        <property name="beginTime" type="java.sql.Time">
+            <column name="begin_time" length="8" not-null="true" />
+        </property>
+        <property name="endTime" type="java.sql.Time">
+            <column name="end_time" length="8" not-null="true" />
+        </property>
+        <set name="schedules" inverse="true">
+            <key>
+                <column name="period_id" not-null="true" />
+            </key>
+            <one-to-many class="com.whx.bean.Schedule" />
+        </set>
+        <set name="workTimes" inverse="true">
+            <key>
+                <column name="period_id" not-null="true" />
+            </key>
+            <one-to-many class="com.whx.bean.WorkTime" />
+        </set>
+        <set name="registrations" inverse="true">
+            <key>
+                <column name="period_id" not-null="true" />
+            </key>
+            <one-to-many class="com.whx.bean.Registration" />
+        </set>
+      
+    </class>
+</hibernate-mapping>

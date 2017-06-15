@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<include file="struts-default.xml"></include>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<constant name="struts.custom.i18n.resources" value="globalMessages" />
+	<package name="default" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<action name="SecurityCodeImageAction" class="com.whx.validCode.ValidCodeAction">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+		<action name="loginValidate" class="com.whx.action.validators.LoginValidate">
+			<result name="input">/login.jsp</result>
+			<result type="chain">login</result>
+		</action>
+		<action name="login" class="com.whx.action.login.LoginAction">
+			<result type="chain">user</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="*_Register"
+			class="com.whx.action.register.RegisterInformationTipAction" method="{1}">
+		</action>
+		<action name="registerAddUserAction" class="com.whx.action.register.RegisterAddUserAction">
+			<result name="success">WEB-INF/content/RegisterActivateTip.jsp</result>
+		</action>
+		<action name="user" class="com.whx.action.user.UserAction">
+			<result>WEB-INF/content/UserInfo.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<action name="executeUserLogin" class="com.whx.action.user.UserAction"
+			method="executeUserLogin">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="reg" class="com.whx.action.user.UserAction"
+			method="forwardToReg">
+			<result name="success">
+				WEB-INF/content/reg.jsp
+			</result>
+		</action>
+		<action name="register"
+			class="com.whx.action.register.RegisterInformationTipAction">
+			<interceptor-ref name="fileUploadStack" />
+			<result name="success">WEB-INF/content/UserInfo.jsp</result>
+		</action>
+		
+		<action name="updateUserAction" class="com.whx.action.user.UpdateUserAction">
+			<result type="chain">getUserInfo</result>
+		</action>
+		<action name="getUserInfo" class="com.whx.action.user.UpdateUserAction"
+			method="getUserInfo">
+			<result>WEB-INF/content/UserInfo.jsp</result>
+		</action>
+		<action name="urlToSearchHospital" class="com.whx.action.url.UrlAction"
+			method="urlToSearchHospital">
+			<result> /WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="hospitalInitAction" class="com.whx.action.hospitalInit.HospitalInitAction">
+			<result>/WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="searchHospitalByProperty" class="com.whx.action.hospitalInit.HospitalInitAction"
+			method="searchHospitalByProperty">
+			<result>/WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="searchHospitalByArea" class="com.whx.action.hospitalInit.HospitalInitAction"
+			method="searchHospitalByArea">
+			<result>/WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="searchHospitalByRank" class="com.whx.action.hospitalInit.HospitalInitAction"
+			method="searchHospitalByRank">
+			<result>/WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="searchHospital" class="com.whx.action.hospitalInit.HospitalInitAction"
+			method="searchHospital">
+			<result>/WEB-INF/content/Main.jsp</result>
+		</action>
+		<action name="hospitalAction" class="com.whx.action.hospitalInit.HospitalAction">
+			<result>/WEB-INF/content/HospitalDepInfo.jsp</result>
+		</action>
+		<action name="doctorAction" class="com.whx.action.hospitalInit.DoctorAction">
+			<result>/WEB-INF/content/DoctorList.jsp</result>
+		</action>
+		<action name="searchDoctorByIllness" class="com.whx.action.hospitalInit.DoctorAction"
+			method="searchDoctorByIllness">
+			<result>/WEB-INF/content/DoctorListName.jsp</result>
+		</action>
+		<action name="searchDoctorByDoctorName" class="com.whx.action.hospitalInit.DoctorAction"
+			method="searchDoctorByDoctorName">
+			<result>/WEB-INF/content/DoctorListName.jsp</result>
+		</action>
+		<action name="worktime" class="com.whx.action.hospitalInit.SelectTimeAction"
+			method="workTime">
+			<result name="success" type="json">
+				/WEB-INF/content/DoctorList.jsp
+			</result>
+		</action>
+		<action name="getDoctorList" class="com.whx.action.hospitalInit.DoctorAction"
+			method="getDoctorList">
+		</action>
+		<action name="selectDoctorTimeByDoctorId" class="com.whx.action.hospitalInit.DoctorAction"
+			method="selectDoctorTimeByDoctorId">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="registerIn" class="com.whx.action.hospitalInit.DoctorAction"
+			method="registerInfo">
+			<result name="success">
+				/WEB-INF/content/registerInf.jsp
+			</result>
+		</action>
+		<action name="Registration" class="com.whx.action.hospitalInit.RegisterAction">
+			<result name="success">
+				/WEB-INF/content/Jiaofeigli.jsp
+			</result>
+			<result type="redirectAction" name="input">
+				<param name="actionName">registerInSec</param>
+				<param name="doctorId">${doctorId}</param>
+				<param name="time1">${time}</param>
+				<param name="date">${date}</param>
+				<param name="tip3">${tip3}</param>
+			</result>
+		</action>
+		<action name="registerInSec" class="com.whx.action.hospitalInit.DoctorAction"
+			method="registerInfoSec">
+			<result name="success">
+				/WEB-INF/content/registerInf.jsp
+			</result>
+		</action>
+		<action name="bookingAction" class="com.whx.action.hospitalInit.BookingAction">
+			<result name="input">/WEB-INF/content/Jiaofeigli.jsp</result>
+			<result type="chain">registrationSelectAction</result>
+		</action>
+		<action name="registrationSelectAction"
+			class="com.whx.action.hospitalInit.RegisterOrderSelectAction">
+			<result name="success">
+				/WEB-INF/content/Yuyuedingdan.jsp
+			</result>
+		</action>
+		<action name="payAction" class="com.whx.action.hospitalInit.PayAction">
+			<result name="success">
+				/WEB-INF/content/Jiaofeigli.jsp
+			</result>
+			<result type="chain" name="input">
+				registrationSelectAction
+			</result>
+		</action>
+		<action name="deleteRegistrtion"
+			class="com.whx.action.hospitalInit.RegisterOrderSelectAction" method="deleteRegistrtion">
+			<result name="success" type="chain">
+				registrationSelectAction
+			</result>
+		</action>
+		<action name="userJiaofei" class="com.whx.action.hospitalInit.PayAction"
+			method="userJiaofei">
+			<result name="success">
+				/WEB-INF/content/jiaofeiManage.jsp
+			</result>
+		</action>
+		<action name="selectRegistrationOrder"
+			class="com.whx.action.hospitalInit.RegisterOrderSelectAction" method="selectRegistrationOrder">
+			<result name="success">
+				/WEB-INF/content/jiaofeiManage.jsp
+			</result>
+		</action>
+		<action name="selectRegistrationOrderByState"
+			class="com.whx.action.hospitalInit.RegisterOrderSelectAction" method="selectRegistrationOrderByState">
+			<result name="success">
+				/WEB-INF/content/jiaofeiManage.jsp
+			</result>
+		</action>
+		<action name="deleteRegistrtionPay"
+			class="com.whx.action.hospitalInit.RegisterOrderSelectAction" method="deleteRegistrtionPay">
+			<result name="success">
+				/WEB-INF/content/jiaofeiManage.jsp
+			</result>
+		</action>
+		<action name="activateAccount" class="com.whx.action.register.RegisterAddUserAction"
+			method="activateAccount">
+			<result name="success">WEB-INF/content/Reg_success_tip.jsp</result>
+		</action>
+		<action name="applyUserNameAndEmail" class="com.whx.action.register.ResetPasswordAction">
+			<result name="input"> forgetPassword.jsp</result>
+			<result name="success">WEB-INF/content/sendLinkReset.jsp</result>
+		</action>
+		<action name="resetPasswordApplyUI" class="com.whx.action.register.ResetPasswordAction"
+			method="resetPasswordApplyUI">
+			<result name="success">WEB-INF/content/newPasswordSet.jsp </result>
+
+		</action>
+		<action name="resetPassword" class="com.whx.action.register.ResetPasswordAction"
+			method="resetPassword">
+			<result name="success">
+				WEB-INF/content/resetPasswordSuccess.jsp
+			</result>
+			<result name="input">
+				WEB-INF/content/newPasswordSet.jsp
+			</result>
+		</action>
+		<action name="adminLoginAction" class="com.admin.mml.action.AdminLoginAction">
+		<result name="input">/admin/login.jsp</result>
+		<result name="success">/admin/adminMain.jsp</result>
+		</action>
+		<action name="adminUserAction" class="com.admin.mml.action.AdminUserAction">
+		<result name="input">/admin/login.jsp</result>
+		<result name="success">/admin/userManageMain.jsp</result>
+		</action>
+		<action name="deleteUserByUserId" class="com.admin.mml.action.AdminUserAction"
+		method="deleteUserByUserId">
+		<result name="success">/admin/userManageMain.jsp</result>
+		</action>
+		<action name="adminHospitalAction" class="com.admin.mml.action.AdminHospitalAction">
+		<result name="success">/admin/hospitalManageMain.jsp</result>
+		</action>
+		<action name="checkHospitalDetail" class="com.admin.mml.action.AdminHospitalAction"
+		  method="queryHospitalByHospitalId">
+		 <result name="success">/admin/hospital/checkHospitalDetail.jsp</result>
+		</action>
+		<action name="checkEditHospital" class="com.admin.mml.action.AdminHospitalAction"
+		  method="checkEditHospitalByHospitalId">
+		 <result name="success">/admin/hospital/editHospital.jsp</result>
+		</action>
+		<action name="adminHospitalAddAction" class="com.admin.mml.action.AdminHospitalAddAction" >
+		 <result name="success">/admin/hospital/addHospital.jsp</result>
+		</action>
+		<action name="editHospital" class="com.admin.mml.action.AdminHospitalAddAction" 
+		method="editHospital">
+		 <result name="success">/admin/hospital/editHospital.jsp</result>
+		 <result name="input">/admin/hospital/error.jsp</result>
+		</action>
+		<action name="deleteHospital" class="com.admin.mml.action.AdminHospitalAction" 
+		  method="deleteHospitalByByHospitalId">
+		 <result name="success">/admin/hospitalManageMain.jsp</result>
+		</action>
+		<action name="departmentManage" class="com.admin.mml.action.AdminDepartmentAction" 
+		  >
+		 <result name="success">/admin/department/departmentManageMain.jsp</result>
+		</action>
+		<action name="findAllDepsById" class="com.admin.mml.action.AdminDepartmentAction" 
+		 method="findAllDepartmentByHospitalId" >
+		 <result name="success">/admin/department/checkAllDeptOfAHospi.jsp</result>
+		</action>
+		<action name="frowardAddDeptPage" class="com.admin.mml.action.AdminDepartmentAction" 
+		 method="frowardAddDeptPage" >
+		 <result name="success">/admin/department/addDepartment.jsp</result>
+		</action>
+		<action name="addDepartment" class="com.admin.mml.action.AdminDepartmentAction" 
+		 method="addDepartment" >
+		 <result name="input">/admin/department/addDepartment.jsp</result>
+		 <result name="success">/admin/department/addDepartment.jsp</result>
+		</action>
+		<action name="delDepartment" class="com.admin.mml.action.AdminDepartmentAction" 
+		 method="delDepartment" >
+		 <result name="success">/admin/department/checkAllDeptOfAHospi.jsp</result>
+		</action>
+		<action name="doctorManage" class="com.admin.mml.action.AdminDoctorAction" 
+		  >
+		 <result name="success">/admin/doctor/doctorManageMain.jsp</result>
+		</action>
+		<action name="checkDoctorsByHospitalId" class="com.admin.mml.action.AdminDoctorAction" 
+		 method="checkDoctorsByHospitalId" >
+		 <result name="success">/admin/doctor/doctorList.jsp</result>
+		</action>
+		<action name="forwardAddDoctorPage" class="com.admin.mml.action.AdminDoctorAction" 
+		 method="forwardAddDoctorPage" >
+		 <result name="success">/admin/doctor/addDoctor.jsp</result>
+		</action>
+		<action name="addDoctor" class="com.admin.mml.action.AdminDoctorAddAction" 
+		   >
+		   <result name="input">/admin/hospital/error.jsp</result>
+		 <result name="success">/admin/doctor/addDoctor.jsp</result>
+		</action>
+		<action name="checkDoctorByDoctorId" class="com.admin.mml.action.AdminDoctorAction" 
+		  method="checkDoctorByDoctorId">
+		   <result name="input">/admin/hospital/error.jsp</result>
+		 <result name="success">/admin/doctor/checkDoctorDetail.jsp</result>
+		</action>
+		<action name="delDoctorByDoctorId" class="com.admin.mml.action.AdminDoctorAction" 
+		  method="delDoctorByDoctorId">
+		   <result name="input">/admin/hospital/error.jsp</result>
+		 <result name="success">/admin/doctor/doctorList.jsp</result>
+		</action>
+		<action name="editDoctor" class="com.admin.mml.action.AdminDoctorAction" 
+		  method="editDoctor">
+		   <result name="input">/admin/hospital/error.jsp</result>
+		 <result name="success">/admin/doctor/editDoctor.jsp</result>
+		</action>
+		<action name="updateDoctor" class="com.admin.mml.action.AdminDoctorAddAction" 
+		  method="updateDoctor">
+		   <result name="input">/admin/hospital/error.jsp</result>
+		 <result name="success">/admin/doctor/editDoctor.jsp</result>
+		</action>
+		<action name="loginDoctor" class="com.mml.doctor.action.DoctorLoginAction">
+		   <result name="input">/doctorUser/login.jsp</result>
+		 <result name="success">/doctorUser/doctorMain.jsp</result>
+		</action>
+		<action name="toploginDoctor" class="com.mml.doctor.action.DoctorLoginAction"
+		  method="doctorTopPage">
+		 <result name="success">/doctorUser/doctor/top.jsp</result>
+		</action>
+		<action name="leftMenuloginDoctor" class="com.mml.doctor.action.DoctorLoginAction"
+		  method="doctorLeftMenuPage">
+		 <result name="success">/doctorUser/doctor/leftMenu.jsp</result>
+		</action>
+		<action name="checkUserDoctor" class="com.mml.doctor.action.DoctorUserAction">
+		 <result name="success">/doctorUser/doctor/checkdoctor.jsp</result>
+		</action>
+		<action name="changeDoctorPassword" class="com.mml.doctor.action.DoctorUserAction"
+		method="changePassword">
+		 <result name="success">/doctorUser/doctor/changeDoctorPassword.jsp</result>
+		</action>
+		<action name="forwardToEditPage" class="com.mml.doctor.action.DoctorUserAction"
+		method="forwardToEditPage">
+		 <result name="success">/doctorUser/doctor/editDoctor.jsp</result>
+		</action>
+		<action name="editDoctorInfo" class="com.mml.doctor.action.DoctorUserAction"
+		method="editDoctorInfo">
+		 <result name="success">/doctorUser/doctor/editDoctor.jsp</result>
+		</action>
+		<action name="registrationDoctorList" class="com.mml.doctor.action.DoctorRegistrationOrderAction"
+		>
+		 <result name="success">/doctorUser/doctor/handleRegistrationOrder.jsp</result>
+		</action>
+		<action name="dealWithRegistration" class="com.mml.doctor.action.DoctorRegistrationOrderAction"
+		 method="dealWithRegistration">
+			<result name="input">
+				/admin/hospital/error.jsp
+			</result>
+			<result type="redirectAction" name="success">
+				<param name="actionName">registrationDoctorList</param>
+				<param name="dateTime">${dateTime}</param>
+				<param name="doctorId">${doctorId}</param>
+				<param name="pageIndex">${pageIndex}</param>
+			</result>
+		</action>
+		<action name="doctorScheduleAction" class="com.mml.doctor.action.DoctorScheduleAction">
+		 <result name="success">/doctorUser/doctor/doctorScheduleTable.jsp</result>
+		</action>
+		<action name="forwardToAddSchedulePage" class="com.mml.doctor.action.DoctorScheduleAction"
+		  method="forwardToAddSchedulePage">
+		 <result name="success">/doctorUser/doctor/addDoctorSchedule.jsp</result>
+		</action>
+		<action name="addDoctorSchedule" class="com.mml.doctor.action.DoctorScheduleAction"
+		  method="addDoctorSchedule">
+		 <result type="redirectAction" name="success">
+				<param name="actionName">doctorScheduleAction</param>
+				<param name="doctorId">${doctorId}</param>
+			</result>
+		 <result name="error">
+				/admin/hospital/error.jsp
+			</result>
+			<result name="input">
+				/doctorUser/doctor/addDoctorSchedule.jsp
+			</result>
+		</action>
+		<action name="deleteDoctorSchedule" class="com.mml.doctor.action.DoctorScheduleAction"
+		  method="deleteDoctorSchedule">
+		 <result type="redirectAction" name="success">
+				<param name="actionName">doctorScheduleAction</param>
+				<param name="doctorId">${doctorId}</param>
+			</result>
+		 <result name="input">
+				/admin/hospital/error.jsp
+			</result>
+		</action>
+	</package>
+</struts>

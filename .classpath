@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.generic_6.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="com.genuitec.runtime.library/com.genuitec.jstl_1.2.1">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="WEB-INF/lib"/>
+			<attribute name="owner.project.facets" value="jst.web.jstl"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.jms.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/bean-validator.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.annotation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.ejb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.enterprise.deploy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.management.j2ee.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.persistence.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.resource.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.security.auth.message.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.security.jacc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.servlet.jsp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/javax.transaction.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/jaxb-api-osgi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/jsr311-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/webservices-api-osgi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/weihuaxiao/jar/jar/weld-osgi-bundle.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
